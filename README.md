@@ -37,7 +37,7 @@ Open your app module's build.gradle file (usually found in the app directory).
 Add the following code snippet inside the dependencies block:
 
 ```kotlin
-implementation 'com.github.m800andteam:visitor_sdk:1.0.8'
+implementation 'com.github.CinnoxGitHub:VisitorSDK:1.0.0'
 ```
 This line specifies the dependency on the visitor_sdk library from the JitPack repository. Make sure to replace 1.0.8 with the desired version of the library.
 
