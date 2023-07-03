@@ -20,7 +20,7 @@ Before you begin, ensure that you have the following:
 ## **Step 2: Add Libraries and Dependencies**
 1. Open your project's build.gradle file (usually found in the root directory).
 
-2. Add the following code snippet inside the repositories block in the allprojects section:
+2. Add the following code snippet inside the repositories block in the app/build.gradle section:
    
 ```kotlin
 allprojects {
@@ -32,14 +32,14 @@ allprojects {
 ```
 This will include the JitPack repository in your project, allowing you to fetch dependencies from it.
 
-Open your app module's build.gradle file (usually found in the app directory).
+Open your app module's app/build.gradle file (usually found in the app directory).
 
 Add the following code snippet inside the dependencies block:
 
 ```kotlin
-implementation 'com.github.CinnoxGitHub:VisitorSDK:1.0.0'
+implementation 'com.github.CinnoxGitHub:visitor_sdk:1.0.1'
 ```
-This line specifies the dependency on the visitor_sdk library from the JitPack repository. Make sure to replace 1.0.8 with the desired version of the library.
+This line specifies the dependency on the visitor_sdk library from the JitPack repository. Make sure to replace 1.0.1 with the desired version of the library.
 
 Sync your project with the Gradle files by clicking on the "Sync Now" button or selecting File > Sync Project with Gradle Files.
 Congratulations! You have successfully updated the dependencies using JitPack. The visitor_sdk library is now included in your Android project.
@@ -102,7 +102,7 @@ The package name is a unique identifier for your Android application. It is typi
 4. Open the "AndroidManifest.xml" file and find the "package" attribute in the "manifest" tag.
 5. The value of the "package" attribute is your package name. It usually follows a pattern like "com.example.myapp".
 
-Please provide our library with the package name associated with your Android application.
+Please provide us with the package name associated with your Android application.
 
 FCM Service Key:
 The FCM Service Key, also known as the server key, is a unique identifier used to authenticate requests from the server to the FCM API. To generate the FCM Service Key:
@@ -117,18 +117,18 @@ The FCM Service Key, also known as the server key, is a unique identifier used t
 
 Please ensure that you keep your FCM Service Key secure and avoid sharing it publicly or storing it in insecure locations. It grants access to send messages to your application.
 
-Once you have obtained the package name and FCM Service Key, provide them to our library as instructed.
+Once you have obtained the package name and FCM Service Key, provide them to us as instructed.
 
 If you have any further questions or need additional assistance, please let us know.
 
 
 ## **Conclusion**
 
-Congratulations! You have successfully added and configured the "CinnoxVisitorSDK" library in your Android project. Make sure to refer to the library's documentation for any additional setup or usage instructions.
+Congratulations! You have successfully added and configured the "visitor_sdk" library in your Android project. Make sure to refer to the library's documentation for any additional setup or usage instructions.
 
 Please note that the provided repository URL, username, and library version are examples. Make sure to replace them with the correct values based on your specific library and version requirements.
 
-Refer to the library's documentation for any additional setup or usage instructions specific to the "maaiiconnectmobileclient" library
+Refer to the library's documentation for any additional setup or usage instructions specific to the "visitor_sdk" library
 
 If you have any questions or need further assistance, feel free to ask!
 
