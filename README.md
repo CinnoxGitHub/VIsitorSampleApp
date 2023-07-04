@@ -1,55 +1,32 @@
 # **Android Quick Start Guide**
-This guide will help you quickly set up your Android application using the provided code snippet.
-
-## **Prerequisites**
-Before you begin, ensure that you have the following:
-
-- Android Studio installed on your machine.
-- Basic knowledge of Android development.
-- Access to the necessary libraries and dependencies.
-
-## **Step 1: Create a New Project**
-1. Open Android Studio.
-
-2. Click on "Start a new Android Studio project" or go to File > New > New Project.
+This guide will help you know how to use Cinnox Visitor SDK on Android application through the sample app demonstration.
  
-3. Follow the prompts to configure your project settings, such as choosing a project name, package name, and minimum SDK version.
- 
-4. Click Finish to create the project.
- 
-## **Step 2: Add Libraries and Dependencies**
-1. Open your project's build.gradle file (usually found in the root directory).
-
-2. Add the following code snippet inside the repositories block in the app/build.gradle section:
+## **Step 1: Add Libraries and Dependencies**
+1. Add the following code snippet inside the repositories block in the app/build.gradle section:
    
 ```kotlin
-allprojects {
+buildscript {
     repositories {
-        // Other repositories...
         maven { url 'https://jitpack.io' }
     }
 }
 ```
 This will include the JitPack repository in your project, allowing you to fetch dependencies from it.
 
-Open your app module's app/build.gradle file (usually found in the app directory).
-
-Add the following code snippet inside the dependencies block:
+2. Add the following code snippet inside the dependencies block:
 
 ```kotlin
 implementation 'com.github.CinnoxGitHub:visitor_sdk:1.0.1'
 ```
-This line specifies the dependency on the visitor_sdk library from the JitPack repository. Make sure to replace 1.0.1 with the desired version of the library.
+This line specifies the dependency on the visitor_sdk library from the JitPack repository. 
 
 Sync your project with the Gradle files by clicking on the "Sync Now" button or selecting File > Sync Project with Gradle Files.
 Congratulations! You have successfully updated the dependencies using JitPack. The visitor_sdk library is now included in your Android project.
 
-Please note that the provided repository URL and library version are examples. Make sure to replace them with the correct values based on your specific library and version requirements.
+## **Step 2: Set Up and Initialization**
+1. Open the MainActivity.kt file.
 
-## **Step 3: Update the MainActivity**
-1. Open the MainActivity.kt file .
-
-2. Add the serviceId of the MainActivity class with the provided code snippet.
+2. Replace the value of serviceId with your Cinnox service.
 ```kotlin
 const val serviceId = "xxxx.cinnox.com"
 ```
@@ -58,7 +35,7 @@ const val serviceId = "xxxx.cinnox.com"
 val core = CinnoxVisitorCore.initialize(this, serviceId)
 ```
 
-4. Add CinnoxVisitorCoreListener and register it when you need to know initialize end.
+4. Add CinnoxVisitorCoreListener and register it when you need to know initialization end.
 ```kotlin
  private val mCoreListener: CinnoxVisitorCoreListener = object : CinnoxVisitorCoreListener{
         override fun onInitializationEnd(success: Boolean, throwable: Throwable?) {
@@ -68,7 +45,8 @@ val core = CinnoxVisitorCore.initialize(this, serviceId)
  core.registerListener(mCoreListener)
 ```
 
-## **Step 4: Add CinnoxVisitorWidget in the activity_main.xml**
+## **Step 3: Show Cinnox Widget to User**
+Add CinnoxVisitorWidget in the layout activity_main.xml
 
 ```kotlin
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -90,10 +68,10 @@ val core = CinnoxVisitorCore.initialize(this, serviceId)
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-## **Step 5: Support Firebase Clould Message**
-To integrate Firebase Cloud Messaging (FCM) into your application and provide the necessary information to our library, you will need to obtain the following details:
+## **Step 4: Support Firebase Clould Message**
+To integrate Firebase Cloud Messaging (FCM) of your application with our library, you have to provide us the following info:
 
-Package Name:
+`Package Name`:
 The package name is a unique identifier for your Android application. It is typically defined in the AndroidManifest.xml file of your project. To find the package name:
 
 1. Open your Android project in Android Studio.
@@ -102,10 +80,8 @@ The package name is a unique identifier for your Android application. It is typi
 4. Open the "AndroidManifest.xml" file and find the "package" attribute in the "manifest" tag.
 5. The value of the "package" attribute is your package name. It usually follows a pattern like "com.example.myapp".
 
-Please provide us with the package name associated with your Android application.
-
-FCM Service Key:
-The FCM Service Key, also known as the server key, is a unique identifier used to authenticate requests from the server to the FCM API. To generate the FCM Service Key:
+`FCM Server Key`:
+The FCM Server key is a unique identifier used to authenticate requests from the server to the FCM API. To generate the FCM Server Key:
 
 1. Go to the Firebase console (console.firebase.google.com).
 2. Select your Firebase project or create a new one.
@@ -115,20 +91,45 @@ The FCM Service Key, also known as the server key, is a unique identifier used t
 6. If you haven't generated a server key before, click on the "Create Server Key" button. If you have an existing server key, you can use that.
 7. A dialog box will appear displaying your FCM Service Key. Copy the key and provide it to our library.
 
-Please ensure that you keep your FCM Service Key secure and avoid sharing it publicly or storing it in insecure locations. It grants access to send messages to your application.
 
-Once you have obtained the package name and FCM Service Key, provide them to us as instructed.
+# **API documentation**
+```kotlin
+/**
+ * The core functionality for the Cinnox Visitor SDK
+ */
+class CinnoxVisitorCore
 
-If you have any further questions or need additional assistance, please let us know.
+/**
+ * Initializes the `CinnoxVisitorCore` instance.
+ *
+ * @param context The application context.
+ * @param serviceId The name of your service.
+ * @return The initialized `CinnoxVisitorCore` instance.
+ */
+fun initialize(context: Context, serviceId: String): CinnoxVisitorCore
 
+/**
+ * Uninitializes the `CinnoxVisitorCore` instance.
+ */
+fun uninitialize()
 
-## **Conclusion**
+/**
+ * Registers a listener for `CinnoxVisitorCore` events.
+ *
+ * @param listener The listener to be registered.
+ */
+fun registerListener(listener: CinnoxVisitorCoreListener)
 
-Congratulations! You have successfully added and configured the "visitor_sdk" library in your Android project. Make sure to refer to the library's documentation for any additional setup or usage instructions.
+/**
+ * The listener interface for CinnoxVisitorCore events.
+ */
+interface CinnoxVisitorCoreListener
 
-Please note that the provided repository URL, username, and library version are examples. Make sure to replace them with the correct values based on your specific library and version requirements.
-
-Refer to the library's documentation for any additional setup or usage instructions specific to the "visitor_sdk" library
-
-If you have any questions or need further assistance, feel free to ask!
-
+/**
+ * Called when the initialization of CinnoxVisitorCore ends.
+ *
+ * @param success Indicates whether the initialization was successful or not.
+ * @param throwable The Throwable object containing an error, if any occurred during initialization.
+ */
+fun onInitializationEnd(success: Boolean, throwable: Throwable?)
+```
