@@ -44,7 +44,7 @@ buildscript {
     }
 }
 dependencies {
-    implementation ('com.github.CinnoxGitHub:visitor_sdk:1.0.2')
+    implementation ('com.github.CinnoxGitHub:visitor_sdk:1.0.3')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
