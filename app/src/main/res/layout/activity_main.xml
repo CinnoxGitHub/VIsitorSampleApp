@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.m800.maaiiconnect.mobile.client.CinnoxVisitorWidget
+    <com.m800.cinnox.visitor.CinnoxVisitorWidget
         android:id="@+id/floating_button"
         android:layout_width="72dp"
         android:layout_height="72dp"

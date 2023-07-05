@@ -3,8 +3,8 @@ package com.cinnox.visitorsampleapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.m800.maaiiconnect.mobile.client.CinnoxVisitorCore
-import com.m800.maaiiconnect.mobile.client.CinnoxVisitorCoreListener
+import com.m800.cinnox.visitor.CinnoxVisitorCore
+import com.m800.cinnox.visitor.CinnoxVisitorCoreListener
 
 class MainActivity : AppCompatActivity() {
     companion object{
