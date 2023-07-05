@@ -16,7 +16,7 @@ This will include the JitPack repository in your project, allowing you to fetch 
 2. Add the following code snippet inside the dependencies block:
 
 ```kotlin
-implementation 'com.github.CinnoxGitHub:visitor_sdk:1.0.1'
+implementation 'com.github.CinnoxGitHub:visitor_sdk:1.0.2'
 ```
 This line specifies the dependency on the visitor_sdk library from the JitPack repository. 
 
