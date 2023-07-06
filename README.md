@@ -90,6 +90,7 @@ The FCM Server key is a unique identifier used to authenticate requests from the
 5. Scroll down to the "Server Key" section.
 6. If you haven't generated a server key before, click on the "Create Server Key" button. If you have an existing server key, you can use it.
 7. A dialog box will appear displaying your FCM Service Key. Copy the key and provide it to our library.
+
 Please send us your info via email at support@cinnox.com with "Info for FCM" as the email subject. 
 
 # **API Documentation**
