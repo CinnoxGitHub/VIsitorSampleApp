@@ -1,8 +1,8 @@
 # **Android Quick Start Guide**
-This guide will help you know how to use Cinnox Visitor SDK on Android application through the sample app demonstration.
+This guide will help you know how to use the CINNOX Visitor SDK on Android application through the sample app demonstration.
  
 ## **Step 1: Add Libraries and Dependencies**
-1. Add the following code snippet inside the repositories block in the app/build.gradle section:
+1. Add the following code snippet inside the repositories block to the app/build.gradle section:
    
 ```kotlin
 buildscript {
@@ -23,10 +23,10 @@ This line specifies the dependency on the visitor_sdk library from the JitPack r
 Sync your project with the Gradle files by clicking on the "Sync Now" button or selecting File > Sync Project with Gradle Files.
 Congratulations! You have successfully updated the dependencies using JitPack. The visitor_sdk library is now included in your Android project.
 
-## **Step 2: Set Up and Initialization**
+## **Step 2: Set Up and Initialisation**
 1. Open the MainActivity.kt file.
 
-2. Replace the value of serviceId with your Cinnox service.
+2. Replace the value of serviceId with your CINNOX subdomain. (Login to your CINNOX Dashboard. Navigate to Administration> Widget> Installation. The URL on the right hand side of the Domain row is the subdomain.)
 ```kotlin
 const val serviceId = "xxxx.cinnox.com"
 ```
@@ -35,7 +35,7 @@ const val serviceId = "xxxx.cinnox.com"
 val core = CinnoxVisitorCore.initialize(this, serviceId)
 ```
 
-4. Add CinnoxVisitorCoreListener and register it when you need to know initialization end.
+4. Add CinnoxVisitorCoreListener and register it when you need to know the initialisation end.
 ```kotlin
  private val mCoreListener: CinnoxVisitorCoreListener = object : CinnoxVisitorCoreListener{
         override fun onInitializationEnd(success: Boolean, throwable: Throwable?) {
@@ -45,7 +45,7 @@ val core = CinnoxVisitorCore.initialize(this, serviceId)
  core.registerListener(mCoreListener)
 ```
 
-## **Step 3: Show Cinnox Widget to User**
+## **Step 3: Show your CINNOX Widget to Users**
 Add CinnoxVisitorWidget in the layout activity_main.xml
 
 ```kotlin
@@ -69,7 +69,7 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
 ```
 
 ## **Step 4: Support Firebase Clould Message**
-To integrate Firebase Cloud Messaging (FCM) of your application with our library, you have to provide us the following info:
+To integrate Firebase Cloud Messaging (FCM) of your application with our library, you have to provide us with the following info:
 
 `Package Name`:
 The package name is a unique identifier for your Android application. It is typically defined in the AndroidManifest.xml file of your project. To find the package name:
@@ -88,28 +88,28 @@ The FCM Server key is a unique identifier used to authenticate requests from the
 3. Navigate to the "Project settings" by clicking on the gear icon.
 4. In the "Project settings" page, select the "Cloud Messaging" tab.
 5. Scroll down to the "Server Key" section.
-6. If you haven't generated a server key before, click on the "Create Server Key" button. If you have an existing server key, you can use that.
+6. If you haven't generated a server key before, click on the "Create Server Key" button. If you have an existing server key, you can use it.
 7. A dialog box will appear displaying your FCM Service Key. Copy the key and provide it to our library.
+Please send us your info via email at support@cinnox.com with "Info for FCM" as the email subject. 
 
-
-# **API documentation**
+# **API Documentation**
 ```kotlin
 /**
- * The core functionality for the Cinnox Visitor SDK
+ * The core functionality for the CINNOX Visitor SDK
  */
 class CinnoxVisitorCore
 
 /**
- * Initializes the `CinnoxVisitorCore` instance.
+ * Initialises the `CinnoxVisitorCore` instance.
  *
  * @param context The application context.
  * @param serviceId The name of your service.
- * @return The initialized `CinnoxVisitorCore` instance.
+ * @return The initialised `CinnoxVisitorCore` instance.
  */
 fun initialize(context: Context, serviceId: String): CinnoxVisitorCore
 
 /**
- * Uninitializes the `CinnoxVisitorCore` instance.
+ * Uninitialises the `CinnoxVisitorCore` instance.
  */
 fun uninitialize()
 
@@ -126,10 +126,10 @@ fun registerListener(listener: CinnoxVisitorCoreListener)
 interface CinnoxVisitorCoreListener
 
 /**
- * Called when the initialization of CinnoxVisitorCore ends.
+ * Called when the initialisation of CinnoxVisitorCore ends.
  *
- * @param success Indicates whether the initialization was successful or not.
- * @param throwable The Throwable object containing an error, if any occurred during initialization.
+ * @param success Indicates whether the initialisation was successful or not.
+ * @param throwable The Throwable object contains an error, if any occurred during initialisation.
  */
 fun onInitializationEnd(success: Boolean, throwable: Throwable?)
 ```
