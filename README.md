@@ -93,6 +93,11 @@ The FCM Server key is a unique identifier used to authenticate requests from the
 
 Please send us your info via email at support@cinnox.com with "Info for FCM" as the email subject. 
 
+
+# **Compatibility**
+Android 7 or later
+
+
 # **API Documentation**
 ```kotlin
 /**
