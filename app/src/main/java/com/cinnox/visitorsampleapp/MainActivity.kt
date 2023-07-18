@@ -3,8 +3,10 @@ package com.cinnox.visitorsampleapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.m800.cinnox.visitor.CinnoxPushListener
 import com.m800.cinnox.visitor.CinnoxVisitorCore
 import com.m800.cinnox.visitor.CinnoxVisitorCoreListener
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     companion object{
@@ -23,8 +25,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val mCinnoxPushListener: CinnoxPushListener = object : CinnoxPushListener{
+        override fun onPushMessage(message: JSONObject?) {
+            Log.d(TAG, "onPushMessage, message: $message")
+        }
+
+    }
+
     private fun init(){
         val core = CinnoxVisitorCore.initialize(this, serviceId)
         core.registerListener(mCoreListener)
+        core.registerPushListener(this, mCinnoxPushListener)
     }
 }
