@@ -10,7 +10,6 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     companion object{
-        const val serviceId = "xxxx.cinnox.com"
         const val TAG = "MainActivity"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,22 +18,22 @@ class MainActivity : AppCompatActivity() {
         init()
     }
 
-    private val mCoreListener: CinnoxVisitorCoreListener = object : CinnoxVisitorCoreListener{
+    private val mCoreListener: CinnoxVisitorCoreListener = object : CinnoxVisitorCoreListener {
         override fun onInitializationEnd(success: Boolean, throwable: Throwable?) {
             Log.d(TAG, "onInitializationEnd, isSuccess: $success, throwable: $throwable")
         }
     }
 
-    private val mCinnoxPushListener: CinnoxPushListener = object : CinnoxPushListener{
+    private val mCinnoxPushListener: CinnoxPushListener = object : CinnoxPushListener {
         override fun onPushMessage(message: JSONObject?) {
             Log.d(TAG, "onPushMessage, message: $message")
         }
 
     }
 
-    private fun init(){
-        val core = CinnoxVisitorCore.initialize(this, serviceId)
-        core.registerListener(mCoreListener)
-        core.registerPushListener(this, mCinnoxPushListener)
+    private fun init() {
+        val core = CinnoxVisitorCore.getInstance()
+        core?.registerListener(mCoreListener)
+        core?.registerPushListener(this, mCinnoxPushListener)
     }
 }
