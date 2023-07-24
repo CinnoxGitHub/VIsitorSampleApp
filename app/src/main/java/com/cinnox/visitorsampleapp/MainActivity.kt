@@ -18,11 +18,6 @@ class MainActivity : AppCompatActivity() {
         init()
     }
 
-    private val mCoreListener: CinnoxVisitorCoreListener = object : CinnoxVisitorCoreListener {
-        override fun onInitializationEnd(success: Boolean, throwable: Throwable?) {
-            Log.d(TAG, "onInitializationEnd, isSuccess: $success, throwable: $throwable")
-        }
-    }
 
     private val mCinnoxPushListener: CinnoxPushListener = object : CinnoxPushListener {
         override fun onPushMessage(message: JSONObject?) {
@@ -33,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         val core = CinnoxVisitorCore.getInstance()
-        core?.registerListener(mCoreListener)
         core?.registerPushListener(this, mCinnoxPushListener)
     }
 }
