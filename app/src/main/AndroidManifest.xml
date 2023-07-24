@@ -24,6 +24,17 @@
         tools:replace="android:theme"
         android:theme="@style/Theme.VIsitorSampleApp"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="xiaomiAPPID"
+            android:value="2882303761518132286"
+            tools:replace="android:value" />
+
+        <meta-data
+            android:name="xiaomiAPIKey"
+            android:value="5321813228286"
+            tools:replace="android:value" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
