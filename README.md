@@ -25,16 +25,23 @@ Congratulations! You have successfully updated the dependencies using JitPack. T
 
 ## **Step 2: Set Up and Initialisation**
 
-1. Create a new class called MainApplication that extends Application.
+1. Create a new class called MainApplication that extends Application & Add CinnoxVisitorCoreListener and register it when you need to know the initialisation end.
  ```kotlin
  class MainApplication : Application() {
      companion object {
          const val serviceName = "xxxx.cinnox.com" // Replace with your CINNOX subdomain
      }
 
+     private val mCoreListener: CinnoxVisitorCoreListener = object : CinnoxVisitorCoreListener{
+         override fun onInitializationEnd(success: Boolean, throwable: Throwable?) {
+             Log.d(TAG, "onInitializationEnd, isSuccess: $success, throwable: $throwable")
+         }
+     }
+
      override fun onCreate() {
          super.onCreate()
-         CinnoxVisitorCore.initialize(this, serviceName)
+         val core = CinnoxVisitorCore.initialize(this, serviceName)
+         core.registerListener(mCoreListener)
      }
  }
  ```
@@ -51,15 +58,6 @@ Congratulations! You have successfully updated the dependencies using JitPack. T
 
  </application>
  ```
-
-2. Open the MainActivity.kt file and get CinnoxVisitorCore instance and add CinnoxVisitorCoreListener and register it when you need to know the initialisation end.
-```kotlin
-  // Retrieve the CinnoxVisitorCore instance
-  val core = CinnoxVisitorCore.getInstance()
-
-  // Register the core listener to know when the initialization ends
-  core.registerListener(mCoreListener)
-```
 
 ## **Step 3: Show your CINNOX Widget to Users**
 Add CinnoxVisitorWidget in the layout activity_main.xml
@@ -117,12 +115,18 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
    ```kotlin
    import com.cinnox.visitor.CinnoxPushListener
    import org.json.JSONObject
-   class MyCinnoxPushListener : CinnoxPushListener {
+
+   private val mPushListener : CinnoxPushListener = object : CinnoxPushListener{
       override fun onPushMessage(message: JSONObject?) {
-          // Handle the CINNOX push message here
-          // This method will be called when you receive a CINNOX push message
+          // Handle push message here
+          // This method will be called when receive a non CINNOX push message
       }
    }
+   // Retrieve the CinnoxVisitorCore instance
+   val core = CinnoxVisitorCore.getInstance()
+ 
+   // Register the push listener
+   core.registerListener(applicationContext, mPushListener)
    ```
    You can now use MyCinnoxPushListener to handle non-CINNOX push messages in your app.
 
@@ -161,12 +165,10 @@ fun registerListener(listener: CinnoxVisitorCoreListener)
 /**
  * Registers a push listener to receive non-CINNOX push messages.
  *
- * @param context The activity context.
+ * @param context The application context.
  * @param listener The listener to be registered.
  */
-fun registerPushListener(context: Context, listener: CinnoxPushListener) {
-    MainNotificationManager.getInstance(context)?.setNotificationListener(listener)
-}
+fun registerPushListener(context: Context, listener: CinnoxPushListener)
 
 /**
  * The listener interface for CinnoxVisitorCore events.
