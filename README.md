@@ -109,26 +109,77 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
  
 3. If you have already implemented FCM service in your app, please follow these steps:
 
-   1. Remove your FCM service declaration from your AndroidManifest.xml.
-   
-   2. Implement the CinnoxPushListener interface in your app. We will bypass all non CINNOX messages to you using this listener. Here's an example:
+   1. Here's an example of the FcmPushService class:
    ```kotlin
-   import com.cinnox.visitor.CinnoxPushListener
-   import org.json.JSONObject
-
-   private val mPushListener : CinnoxPushListener = object : CinnoxPushListener{
-      override fun onPushMessage(message: JSONObject?) {
-          // Handle push message here
-          // This method will be called when receive a non CINNOX push message
-      }
+   class FcmPushService : FirebaseMessagingService() {
+       // ...
+   
+       override fun onNewToken(token: String) {
+           CinnoxVisitorCore.getInstance().getPushManager().updateToken(
+               CinnoxPushType.FCM,
+               token
+           )
+       }
+   
+       override fun onMessageReceived(remoteMessage: RemoteMessage) {
+           val data = genFcmRemoteMessagePushData(remoteMessage)
+           data?.let {
+               CinnoxVisitorCore.getInstance().getPushManager().handlePushNotification(
+                   CinnoxPushType.FCM,
+                   it
+               )
+           }
+       }
+   
+       // ...
    }
-   // Retrieve the CinnoxVisitorCore instance
-   val core = CinnoxVisitorCore.getInstance()
- 
-   // Register the push listener
-   core.registerListener(applicationContext, mPushListener)
    ```
-   You can now use MyCinnoxPushListener to handle non-CINNOX push messages in your app.
+   (1). You should pass the received token to the updateToken api of the CinnoxPushManager to update the token.
+   
+   (2). To handle incoming push notifications. Extract the necessary data from the RemoteMessage object and pass it to the handlePushNotification api of the CinnoxPushManager.
+
+   (3). You can use the method genFcmRemoteMessagePushData in PushHelper file for extract the JSONObject data for the handlePushNotification api.
+   
+   2. To handle system notifications when the user clicks on them, you can follow this example using the LAUNCHER MainActivity class:
+   ```kotlin
+   class MainActivity : AppCompatActivity() {
+       // ...
+   
+       override fun onCreate(savedInstanceState: Bundle?) {
+           super.onCreate(savedInstanceState)
+           setContentView(R.layout.activity_main)
+           handleClickedSystemNotification()
+       }
+   
+       override fun onNewIntent(intent: Intent?) {
+           super.onNewIntent(intent)
+           setIntent(intent)
+           handleClickedSystemNotification()
+       }
+   
+       private fun handleClickedSystemNotification() {
+           genFcmIntentPushData(intent)?.let { data ->
+               if (data.length() == 0) {
+                   Log.i(TAG, "handleClickedSystemNotification data is empty")
+                   return
+               }
+               CinnoxVisitorCore.getInstance().getPushManager().handleClickedSystemNotification(
+                   CinnoxPushType.FCM,
+                   data
+               )
+           } ?: run {
+               Log.i(TAG, "handleClickedSystemNotification data is null")
+           }
+       }
+   
+       // ...
+   }
+   ```
+   (1). In this example, when the user clicks on a system notification, the handleClickedSystemNotification method is called. Extract the necessary data from the intent object and pass it to the handleClickedSystemNotification api of the CinnoxPushManager for further processing.
+
+   (2). If the notification is not the type which handleClickedSystemNotification api can process, the api will return false to let your app switch to default click system notification flow.
+
+   (3). You can use the method genFcmIntentPushData in PushHelper file for extract the JSONObject data for the handleClickedSystemNotification api.
 
 # **Compatibility**
 Android 7 or later
@@ -163,12 +214,11 @@ fun uninitialize()
 fun registerListener(listener: CinnoxVisitorCoreListener)
 
 /**
- * Registers a push listener to receive non-CINNOX push messages.
+ * Returns the CinnoxPushManager instance.
  *
- * @param context The application context.
- * @param listener The listener to be registered.
+ * @return The CinnoxPushManager instance.
  */
-fun registerPushListener(context: Context, listener: CinnoxPushListener)
+fun getPushManager(): CinnoxPushManager 
 
 /**
  * The listener interface for CinnoxVisitorCore events.
@@ -184,15 +234,39 @@ interface CinnoxVisitorCoreListener
 fun onInitializationEnd(success: Boolean, throwable: Throwable?)
 
 /**
- * The listener interface for non-CINNOX push messages.
+ * App integrate the push and use this interface for handle push notification.
  */
-interface CinnoxPushListener 
+interface CinnoxPushManager {
 
-/**
-* Called when receiving a non-CINNOX handled push message.
-*
-* @param message The message from FCM (Firebase Cloud Messaging).
-*/
-fun onPushMessage(message: JSONObject?)
+    /**
+     * Updates the push notification token for the specified push notification type.
+     *
+     * @param type The type of the push notification.
+     * @param token The new token value.
+     */
+    fun updateToken(type: CinnoxPushType, token: String)
+
+    /**
+     * Handles the incoming push notification of the specified type.
+     *
+     * @param type The type of the push notification.
+     * @param data The JSON object containing the push notification data.
+     */
+    fun handlePushNotification(type: CinnoxPushType, data: JSONObject)
+
+    /**
+     * Handles the scenario when a system notification of the specified type is clicked.
+     *
+     * @param type The type of the push notification.
+     * @param data The JSON object containing the notification data.
+     * @return True if the handling was successful, false otherwise.
+     */
+    fun handleClickedSystemNotification(type: CinnoxPushType, data: JSONObject): Boolean
+
+    /**
+     * Releases any resources held by the CinnoxPushManager instance and revoke the push token.
+     */
+    fun release()
+}
 
 ```
