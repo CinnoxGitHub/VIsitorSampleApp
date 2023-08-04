@@ -8,16 +8,16 @@ import org.json.JSONObject
 
 private val TAG = "PushHelper"
 
-fun genFcmRemoteMessageData(remoteMessage: RemoteMessage): JSONObject? {
+fun genFcmRemoteMessagePushData(remoteMessage: RemoteMessage): JSONObject? {
     return try {
         JSONObject(remoteMessage.data.toMap())
     } catch (e: Exception) {
-        Log.e(TAG, "genFcmRemoteMessageData error", e)
+        Log.e(TAG, "genFcmRemoteMessagePushData error", e)
         null
     }
 }
 
-fun genFcmIntentData(intent: Intent): JSONObject? {
+fun genFcmIntentPushData(intent: Intent): JSONObject? {
     return intent.extras?.convertToJson()
 }
 

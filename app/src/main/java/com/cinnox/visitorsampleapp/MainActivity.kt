@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.cinnox.visitorsampleapp.push.genFcmIntentData
+import com.cinnox.visitorsampleapp.push.genFcmIntentPushData
 import com.m800.cinnox.visitor.CinnoxVisitorCore
 import com.m800.sdk.core.noti.CinnoxPushType
 
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleClickedSystemNotification() {
-        genFcmIntentData(intent)?.let { data ->
+        genFcmIntentPushData(intent)?.let { data ->
             if (data.length() == 0) {
                 Log.i(TAG, "handleClickedSystemNotification data is empty")
                 return

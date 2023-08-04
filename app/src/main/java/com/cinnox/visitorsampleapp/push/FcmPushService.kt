@@ -26,7 +26,7 @@ class FcmPushService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.i(TAG, "onMessageReceived remoteMessage: ${remoteMessage.toLogString()}")
-        val data = genFcmRemoteMessageData(remoteMessage)
+        val data = genFcmRemoteMessagePushData(remoteMessage)
         Log.i(TAG, "onMessageReceived data: $data")
         data?.let {
             CinnoxVisitorCore.getInstance().getPushManager().handlePushNotification(
