@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.cinnox.visitorsampleapp.push.genFcmIntentData
-import com.m800.cinnox.visitor.CinnoxPushListener
 import com.m800.cinnox.visitor.CinnoxVisitorCore
 import com.m800.sdk.core.noti.CinnoxPushType
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        init()
         handleClickedSystemNotification()
     }
 
@@ -27,18 +24,6 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         handleClickedSystemNotification()
-    }
-
-    private val mCinnoxPushListener: CinnoxPushListener = object : CinnoxPushListener {
-        override fun onPushMessage(message: JSONObject?) {
-            Log.d(TAG, "onPushMessage, message: $message")
-        }
-
-    }
-
-    private fun init() {
-        val core = CinnoxVisitorCore.getInstance()
-        core.registerPushListener(this, mCinnoxPushListener)
     }
 
     private fun handleClickedSystemNotification() {
