@@ -6,7 +6,7 @@ import android.util.Log
 import com.google.firebase.messaging.RemoteMessage
 import org.json.JSONObject
 
-private val TAG = "PushHelper"
+private val TAG = "FcmPushHelper"
 
 fun genFcmRemoteMessagePushData(remoteMessage: RemoteMessage): JSONObject? {
     return try {

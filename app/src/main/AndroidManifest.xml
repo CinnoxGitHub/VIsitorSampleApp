@@ -23,6 +23,10 @@
         android:theme="@style/Theme.VIsitorSampleApp"
         tools:targetApi="31">
 
+        <meta-data
+            android:name="huaweiAPPID"
+            android:value="\${huaweiAPPID}"/>
+
         <service
             android:name="com.cinnox.visitorsampleapp.push.FcmPushService"
             android:exported="false">
@@ -30,6 +34,19 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <!-- Huawei push -->
+        <service
+            android:name="com.cinnox.visitorsampleapp.push.HuaweiPushService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="push_kit_auto_init_enabled"
+            android:value="true" />
+        <!-- Huawei push -->
 
         <activity
             android:name=".MainActivity"
@@ -46,4 +63,11 @@
         </activity>
     </application>
 
+    <!-- Huawei push -->
+    <queries>
+        <intent>
+            <action android:name="com.huawei.hms.core.aidlservice" />
+        </intent>
+    </queries>
+    <!-- Huawei push -->
 </manifest>
