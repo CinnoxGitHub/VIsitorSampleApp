@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.cinnox.visitorsampleapp.push.genFcmIntentPushData
+import com.cinnox.visitorsampleapp.push.genHuaweiIntentPushData
+import com.cinnox.visitorsampleapp.push.genXiaomiIntentPushData
 import com.m800.cinnox.visitor.CinnoxVisitorCore
 import com.m800.sdk.core.noti.CinnoxPushType
 
@@ -27,14 +29,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleClickedSystemNotification() {
-        genFcmIntentPushData(intent)?.let { data ->
+        when (MainApplication.pushType) {
+            CinnoxPushType.FCM -> genFcmIntentPushData(intent)
+            CinnoxPushType.XIAOMI -> genXiaomiIntentPushData(intent)
+            CinnoxPushType.HUAWEI -> genHuaweiIntentPushData(intent)
+        }?.let { data ->
             if (data.length() == 0) {
                 Log.i(TAG, "handleClickedSystemNotification data is empty")
                 return
             }
             Log.i(TAG, "handleClickedSystemNotification data: $data")
             CinnoxVisitorCore.getInstance().getPushManager().handleClickedSystemNotification(
-                CinnoxPushType.FCM,
+                MainApplication.pushType,
                 data
             )
         } ?: run {

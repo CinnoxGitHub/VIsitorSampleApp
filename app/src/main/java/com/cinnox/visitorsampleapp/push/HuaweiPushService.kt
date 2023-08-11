@@ -33,7 +33,7 @@ class HuaweiPushService : HmsMessageService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         Log.i(TAG, "onMessageReceived remoteMessage: ${remoteMessage?.toLogString()}")
         super.onMessageReceived(remoteMessage)
-        remoteMessage?.let {
+        remoteMessage?.let { remoteMessage ->
             val data = genHuaweiRemoteMessagePushData(remoteMessage)
             Log.i(TAG, "onMessageReceived data: $data")
             data?.let {
@@ -47,18 +47,17 @@ class HuaweiPushService : HmsMessageService() {
 
     private fun initToken() {
         Log.i(TAG, "initToken")
-        mContext.packageManager?.getApplicationInfo(mContext.packageName.orEmpty(), PackageManager.GET_META_DATA)?.let { appInfo ->
-            val appId = appInfo.metaData.get(APP_ID).toString()
-            Log.i(TAG, "initToken appId: $appId")
-            try {
-                val token = HmsInstanceId.getInstance(mContext).getToken(appId, "HCM")
-                Log.i(TAG, "initToken token: $token")
-                if (!token.isNullOrEmpty()) {
-                    updateToken(token)
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "initToken error", e)
+        val appInfo = mContext.packageManager.getApplicationInfo(mContext.packageName, PackageManager.GET_META_DATA)
+        val appId = appInfo.metaData.get(APP_ID)?.toString()
+        Log.i(TAG, "initToken appId: $appId")
+        try {
+            val token = HmsInstanceId.getInstance(mContext).getToken(appId, "HCM")
+            Log.i(TAG, "initToken token: $token")
+            if (!token.isNullOrEmpty()) {
+                updateToken(token)
             }
+        } catch (e: Exception) {
+            Log.e(TAG, "initToken error", e)
         }
     }
 
