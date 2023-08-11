@@ -8,6 +8,9 @@ import com.huawei.hms.push.HmsMessageService
 import com.huawei.hms.push.RemoteMessage
 import com.m800.cinnox.visitor.CinnoxVisitorCore
 import com.m800.sdk.core.noti.CinnoxPushType
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.lang.Exception
 
 private const val APP_ID = "huaweiAPPID"
@@ -50,14 +53,16 @@ class HuaweiPushService : HmsMessageService() {
         val appInfo = mContext.packageManager.getApplicationInfo(mContext.packageName, PackageManager.GET_META_DATA)
         val appId = appInfo.metaData.get(APP_ID)?.toString()
         Log.i(TAG, "initToken appId: $appId")
-        try {
-            val token = HmsInstanceId.getInstance(mContext).getToken(appId, "HCM")
-            Log.i(TAG, "initToken token: $token")
-            if (!token.isNullOrEmpty()) {
-                updateToken(token)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val token = HmsInstanceId.getInstance(mContext).getToken(appId, "HCM")
+                Log.i(TAG, "initToken token: $token")
+                if (!token.isNullOrEmpty()) {
+                    updateToken(token)
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "initToken error", e)
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "initToken error", e)
         }
     }
 
