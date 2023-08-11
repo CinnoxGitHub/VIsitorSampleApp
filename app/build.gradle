@@ -41,14 +41,20 @@ android {
 buildscript {
     repositories {
         maven { url 'https://jitpack.io' }
+        maven { url 'https://developer.huawei.com/repo/' }
     }
 }
 dependencies {
-    implementation ('com.github.CinnoxGitHub:visitor_sdk:1.0.11')
+    implementation ('com.github.CinnoxGitHub:visitor_sdk:1.0.17')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation files('libs/MiPush_SDK_Client_5_7_8.jar')
+    implementation 'com.huawei.hms:push:6.11.0.300'
+    implementation 'com.huawei.hms:hmscoreinstaller:6.11.0.300'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
+
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.huawei.agconnect'

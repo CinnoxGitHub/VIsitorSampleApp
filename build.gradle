@@ -8,6 +8,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://developer.huawei.com/repo/' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.2.2"
@@ -16,6 +17,7 @@ buildscript {
         classpath 'com.google.gms:google-services:4.3.3'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.2'
         classpath 'net.sf.proguard:proguard-gradle:6.2.2'
+        classpath 'com.huawei.agconnect:agcp:1.0.0.300'
     }
 }
 
