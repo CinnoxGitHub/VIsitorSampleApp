@@ -82,7 +82,7 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-## **Step 4: Support Firebase Clould Message**
+## **Step 4: Support Push Message**
 1. To integrate Firebase Cloud Messaging (FCM) of your application with our library, you have to provide us with the following info:
    `Package Name`:
    The package name is a unique identifier for your Android application. It is typically defined in the AndroidManifest.xml file of your project. To find the package name:
@@ -107,7 +107,7 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
    Please send us your info via email at support@cinnox.com with "Info for FCM" as the email subject.
 
  
-3. If you have already implemented FCM service in your app, please follow these steps:
+2. If you have already implemented FCM service in your app, please follow these steps:
 
    1. Here's an example of the FcmPushService class:
    ```kotlin
@@ -115,10 +115,7 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
        // ...
    
        override fun onNewToken(token: String) {
-           CinnoxVisitorCore.getInstance().getPushManager().updateToken(
-               CinnoxPushType.FCM,
-               token
-           )
+           updateToken(token)
        }
    
        override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -130,17 +127,125 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
                )
            }
        }
+
+       private fun updateToken(token: String) {
+           CinnoxVisitorCore.getInstance().getPushManager().updateToken(
+               CinnoxPushType.FCM,
+               token
+           )
+       }
    
        // ...
    }
    ```
-   (1). You should pass the received token to the updateToken api of the CinnoxPushManager to update the token.
-   
-   (2). To handle incoming push notifications. Extract the necessary data from the RemoteMessage object and pass it to the handlePushNotification api of the CinnoxPushManager.
+   2. You should pass the received token to the updateToken api of the CinnoxPushManager to update the token.
+   3. To handle incoming push notifications. Extract the necessary data from the RemoteMessage object and pass it to the handlePushNotification api of the CinnoxPushManager.
+   4. You can use the method genFcmRemoteMessagePushData in FcmPushHelper file for extract the JSONObject data for the handlePushNotification api.
+ 
 
-   (3). You can use the method genFcmRemoteMessagePushData in PushHelper file for extract the JSONObject data for the handlePushNotification api.
+3. If you have already implemented XIAOMI service in your app, please follow these steps:
+
+   1. Here's an example of the XiaomiPushService class:
+   ```kotlin
+   class XiaomiPushService : PushMessageReceiver() {
+       // ...
    
-   2. To handle system notifications when the user clicks on them, you can follow this example using the LAUNCHER MainActivity class:
+       override fun onCommandResult(context: Context, message: MiPushCommandMessage) {
+           onNewRegId(message)
+       }
+   
+       override fun onReceiveRegisterResult(context: Context, message: MiPushCommandMessage) {
+           onNewRegId(message)
+       }
+   
+       override fun onReceivePassThroughMessage(context: Context, message: MiPushMessage) {
+           onPushMessage(message)
+       }
+
+       override fun onNotificationMessageArrived(context: Context, message: MiPushMessage) {
+           onPushMessage(message)
+       }
+
+       private fun onNewRegId(message: MiPushCommandMessage) {
+            val arguments = message.commandArguments
+            val token = if (arguments != null && arguments.size > 0) arguments.get(0) else null
+            if (message.resultCode.toInt() == ErrorCode.SUCCESS && message.command == MiPushClient.COMMAND_REGISTER) {
+                if (!token.isNullOrEmpty()) {
+                    updateToken(token)
+                }
+            }
+        }
+    
+        private fun updateToken(token: String) {
+            CinnoxVisitorCore.getInstance().getPushManager().updateToken(
+                CinnoxPushType.XIAOMI,
+                token
+            )
+        }
+    
+        private fun onPushMessage(message: MiPushMessage) {
+            val data = genXiaomiRemoteMessagePushData(message)
+            data?.let {
+                CinnoxVisitorCore.getInstance().getPushManager().handlePushNotification(
+                    CinnoxPushType.XIAOMI,
+                    it
+                )
+            }
+        }
+   
+       // ...
+   }
+   ```
+   2. You should pass the received token to the updateToken api of the CinnoxPushManager to update the token.
+   3. To handle incoming push notifications. Extract the necessary data from the MiPushMessage object and pass it to the handlePushNotification api of the CinnoxPushManager.
+   4. You can use the method genXiaomiRemoteMessagePushData in XiaomiPushHelper file for extract the JSONObject data for the handlePushNotification api.
+   
+
+4. If you have already implemented HUAWEI service in your app, please follow these steps:
+
+   1. Here's an example of the HuaweiPushService class:
+   ```kotlin
+   class HuaweiPushService : HmsMessageService() {
+       // ...
+  
+       override fun onNewToken(token: String?) {
+           super.onNewToken(token)
+           if (!token.isNullOrEmpty()) {
+               updateToken(token)
+           }
+       }
+   
+       override fun onMessageReceived(remoteMessage: RemoteMessage?) {
+           super.onMessageReceived(remoteMessage)
+           remoteMessage?.let { remoteMessage ->
+               val data = genHuaweiRemoteMessagePushData(remoteMessage)
+               data?.let {
+                   CinnoxVisitorCore.getInstance().getPushManager().handlePushNotification(
+                       CinnoxPushType.HUAWEI,
+                       it
+                   )
+               }
+           }
+       }
+
+       private fun updateToken(token: String) {
+           CinnoxVisitorCore.getInstance().getPushManager().updateToken(
+               CinnoxPushType.HUAWEI,
+               token
+           )
+       }
+   
+       // ...
+   }
+   ```
+   2. You should pass the received token to the updateToken api of the CinnoxPushManager to update the token.
+   3. To handle incoming push notifications. Extract the necessary data from the RemoteMessage object and pass it to the handlePushNotification api of the CinnoxPushManager.
+   4. You can use the method genHuaweiRemoteMessagePushData in HuaweiPushHelper file for extract the JSONObject data for the handlePushNotification api.
+   
+   
+5. To handle system notifications when the user clicks on them, you can follow this example using the LAUNCHER MainActivity class:
+
+   1. Here's an example of the MainActivity class:
    ```kotlin
    class MainActivity : AppCompatActivity() {
        // ...
@@ -158,13 +263,18 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
        }
    
        private fun handleClickedSystemNotification() {
-           genFcmIntentPushData(intent)?.let { data ->
+           when (MainApplication.pushType) {
+               CinnoxPushType.FCM -> genFcmIntentPushData(intent)
+               CinnoxPushType.XIAOMI -> genXiaomiIntentPushData(intent)
+               CinnoxPushType.HUAWEI -> genHuaweiIntentPushData(intent)
+           }?.let { data ->
                if (data.length() == 0) {
                    Log.i(TAG, "handleClickedSystemNotification data is empty")
                    return
                }
+               Log.i(TAG, "handleClickedSystemNotification data: $data")
                CinnoxVisitorCore.getInstance().getPushManager().handleClickedSystemNotification(
-                   CinnoxPushType.FCM,
+                   MainApplication.pushType,
                    data
                )
            } ?: run {
@@ -175,11 +285,11 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
        // ...
    }
    ```
-   (1). In this example, when the user clicks on a system notification, the handleClickedSystemNotification method is called. Extract the necessary data from the intent object and pass it to the handleClickedSystemNotification api of the CinnoxPushManager for further processing.
-
-   (2). If the notification is not the type which handleClickedSystemNotification api can process, the api will return false to let your app switch to default click system notification flow.
-
-   (3). You can use the method genFcmIntentPushData in PushHelper file for extract the JSONObject data for the handleClickedSystemNotification api.
+   2. In this example, when the user clicks on a system notification, the handleClickedSystemNotification method is called. Extract the necessary data from the intent object and pass it to the handleClickedSystemNotification api of the CinnoxPushManager for further processing.
+   3. If the notification is not the type which handleClickedSystemNotification api can process, the api will return false to let your app switch to default click system notification flow.
+   4. For FCM push, you can use the method genFcmIntentPushData in FcmPushHelper file for extract the JSONObject data for the handleClickedSystemNotification api.
+   5. For XIAOMI push, you can use the method genXiaomiIntentPushData in XiaomiPushHelper file for extract the JSONObject data for the handleClickedSystemNotification api.
+   6. For HUAWEI push, you can use the method genHuaweiIntentPushData in HuaweiPushHelper file for extract the JSONObject data for the handleClickedSystemNotification api.
 
 # **Compatibility**
 Android 7 or later
