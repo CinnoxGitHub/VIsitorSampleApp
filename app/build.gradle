@@ -15,6 +15,15 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    flavorDimensions "environment"
+    productFlavors {
+        tb {
+            buildConfigField "String", "SERVICE_ID", '"210b.cx-tb.cinnox.com"'
+            manifestPlaceholders.huaweiAPPID = "108922815"
+            manifestPlaceholders.xiaomiAPPID = "2882303761518132286"
+            manifestPlaceholders.xiaomiAPIKey = "5321813228286"
+        }
     }
 
     buildTypes {
@@ -57,4 +66,5 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.huawei.agconnect'
