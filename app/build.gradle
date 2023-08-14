@@ -17,13 +17,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    flavorDimensions "environment"
-    productFlavors {
-        tb {
-            buildConfigField "String", "SERVICE_ID", '"210b.cx-tb.cinnox.com"'
-            manifestPlaceholders.huaweiAPPID = "108922815"
-            manifestPlaceholders.xiaomiAPPID = "2882303761518132286"
-            manifestPlaceholders.xiaomiAPIKey = "5321813228286"
         }
     }
 
