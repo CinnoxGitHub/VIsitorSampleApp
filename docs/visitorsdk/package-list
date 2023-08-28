@@ -1,0 +1,52 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.m800.cinnox.visitor.action////PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/index.html
+$dokka.location:com.m800.cinnox.visitor.action/CallToActionListener///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-call-to-action-listener/index.html
+$dokka.location:com.m800.cinnox.visitor.action/CallToActionListener/onActionEnd/#kotlin.Boolean#com.m800.cinnox.visitor.CinnoxVisitorCoreErrorException?/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-call-to-action-listener/on-action-end.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.CinnoxDirectoryAction///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-cinnox-directory-action/index.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.CinnoxStaffAction///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-cinnox-staff-action/index.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.CinnoxStaffAction/CinnoxStaffAction/#kotlin.String#com.m800.sdk.core.visitor.CinnoxVisitorContactMethod/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-cinnox-staff-action/-cinnox-staff-action.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.CinnoxStaffAction/method/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-cinnox-staff-action/method.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.CinnoxStaffAction/toEid/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-cinnox-staff-action/to-eid.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.CinnoxTagAction///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-cinnox-tag-action/index.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.CinnoxTagAction/CinnoxTagAction/#kotlin.String#com.m800.sdk.core.visitor.CinnoxVisitorContactMethod/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-cinnox-tag-action/-cinnox-tag-action.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.CinnoxTagAction/method/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-cinnox-tag-action/method.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.CinnoxTagAction/toTagId/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-cinnox-tag-action/to-tag-id.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.Companion///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-companion/index.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.Companion/initDirectory/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-companion/init-directory.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.Companion/initStaffAction/#kotlin.String#com.m800.sdk.core.visitor.CinnoxVisitorContactMethod/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-companion/init-staff-action.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction.Companion/initTagAction/#kotlin.String#com.m800.sdk.core.visitor.CinnoxVisitorContactMethod/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/-companion/init-tag-action.html
+$dokka.location:com.m800.cinnox.visitor.action/CinnoxAction///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor.action/-cinnox-action/index.html
+$dokka.location:com.m800.cinnox.visitor////PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCore.Companion///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core/-companion/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCore.Companion/getInstance/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core/-companion/get-instance.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCore.Companion/initialize/#android.content.Context#kotlin.String/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core/-companion/initialize.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCore///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCore/CinnoxVisitorCore/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core/-cinnox-visitor-core.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCore/callToAction/#com.m800.cinnox.visitor.action.CinnoxAction#com.m800.cinnox.visitor.action.CallToActionListener/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core/call-to-action.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCore/getPushManager/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core/get-push-manager.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCore/registerListener/#com.m800.cinnox.visitor.CinnoxVisitorCoreListener/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core/register-listener.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCore/uninitialize/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core/uninitialize.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreError.Companion///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error/-companion/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreError.Companion/fromCode/#kotlin.Int/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error/-companion/from-code.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreError.INIT_FAILED///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error/-i-n-i-t_-f-a-i-l-e-d/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreError.MISSING_INITIALIZATION///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error/-m-i-s-s-i-n-g_-i-n-i-t-i-a-l-i-z-a-t-i-o-n/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreError.TAG_UNAVAILABLE///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error/-t-a-g_-u-n-a-v-a-i-l-a-b-l-e/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreError.TARGET_NOT_FOUND///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error/-t-a-r-g-e-t_-n-o-t_-f-o-u-n-d/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreError.UNSUPPORTED_CONTACT_METHOD///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error/-u-n-s-u-p-p-o-r-t-e-d_-c-o-n-t-a-c-t_-m-e-t-h-o-d/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreError///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreError/code/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error/code.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreError/toString/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error/to-string.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreErrorException///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error-exception/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreErrorException/CinnoxVisitorCoreErrorException/#com.m800.cinnox.visitor.CinnoxVisitorCoreError#kotlin.String?/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error-exception/-cinnox-visitor-core-error-exception.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreErrorException/error/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-error-exception/error.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreListener///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-listener/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorCoreListener/onInitializationEnd/#kotlin.Boolean#kotlin.Throwable?/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-core-listener/on-initialization-end.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorWidget///PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-widget/index.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorWidget/CinnoxVisitorWidget/#android.content.Context#android.util.AttributeSet?#kotlin.Int/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-widget/-cinnox-visitor-widget.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorWidget/applyAppearance/#/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-widget/apply-appearance.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorWidget/onClick/#android.view.View?/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-widget/on-click.html
+$dokka.location:com.m800.cinnox.visitor/CinnoxVisitorWidget/onTouchEvent/#android.view.MotionEvent?/PointingToDeclaration/visitorsdk/com.m800.cinnox.visitor/-cinnox-visitor-widget/on-touch-event.html
+com.m800.cinnox.visitor
+com.m800.cinnox.visitor.action
+
