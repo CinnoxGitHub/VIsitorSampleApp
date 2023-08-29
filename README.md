@@ -291,92 +291,43 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
    5. For XIAOMI push, you can use the method genXiaomiIntentPushData in XiaomiPushHelper file for extract the JSONObject data for the handleClickedSystemNotification api.
    6. For HUAWEI push, you can use the method genHuaweiIntentPushData in HuaweiPushHelper file for extract the JSONObject data for the handleClickedSystemNotification api.
 
+
+## **Use CTA**
+You can use its click-to-action (CTA) features (i.e., Click-to-call or Click-to-chat buttons) on your application.
+
+Widget - a widget, i.e., a small application interface, located at the bottom of a UI page that lets your customers or visitors immediately interact with your business through call or chat.
+
+Click-to-call - a CINNOX widget feature that automatically calls a specific Tag or Staff member whenever a customer.
+
+Click-to-chat - a CINNOX widget that automatically launches a chat room for a specific Tag or Staff member whenever a customer.
+
+```kotlin
+   
+        // create call Tag action
+        val action = CinnoxAction.initTagAction("YOUR_TAG_ID", CinnoxVisitorContactMethod.CALL)
+
+        // create call staff action
+        val action = CinnoxAction.initStaffAction("YOUR_STAFF_EID", CinnoxVisitorContactMethod.IM)
+
+        // create open directory action
+        val action = CinnoxAction.initDirectory()
+
+        CinnoxVisitorCore.getInstance()
+            .callToAction(action, object : CallToActionListener {
+                override fun onActionEnd(
+                    success: Boolean,
+                    throwable: CinnoxVisitorCoreErrorException?
+                ) {
+
+                }
+
+            })
+   ```
+
 # **Compatibility**
 Android 7 or later
 
 
 # **API Documentation**
-```kotlin
-/**
- * The core functionality for the CINNOX Visitor SDK
- */
-class CinnoxVisitorCore
 
-/**
- * Initialises the `CinnoxVisitorCore` instance.
- *
- * @param context The application context.
- * @param serviceId The name of your service.
- * @return The initialised `CinnoxVisitorCore` instance.
- */
-fun initialize(context: Context, serviceId: String): CinnoxVisitorCore
-
-/**
- * Uninitialises the `CinnoxVisitorCore` instance.
- */
-fun uninitialize()
-
-/**
- * Registers a listener for `CinnoxVisitorCore` events.
- *
- * @param listener The listener to be registered.
- */
-fun registerListener(listener: CinnoxVisitorCoreListener)
-
-/**
- * Returns the CinnoxPushManager instance.
- *
- * @return The CinnoxPushManager instance.
- */
-fun getPushManager(): CinnoxPushManager 
-
-/**
- * The listener interface for CinnoxVisitorCore events.
- */
-interface CinnoxVisitorCoreListener
-
-/**
- * Called when the initialisation of CinnoxVisitorCore ends.
- *
- * @param success Indicates whether the initialisation was successful or not.
- * @param throwable The Throwable object contains an error, if any occurred during initialisation.
- */
-fun onInitializationEnd(success: Boolean, throwable: Throwable?)
-
-/**
- * App integrate the push and use this interface for handle push notification.
- */
-interface CinnoxPushManager {
-
-    /**
-     * Updates the push notification token for the specified push notification type.
-     *
-     * @param type The type of the push notification.
-     * @param token The new token value.
-     */
-    fun updateToken(type: CinnoxPushType, token: String)
-
-    /**
-     * Handles the incoming push notification of the specified type.
-     *
-     * @param type The type of the push notification.
-     * @param data The JSON object containing the push notification data.
-     */
-    fun handlePushNotification(type: CinnoxPushType, data: JSONObject)
-
-    /**
-     * Handles the scenario when a system notification of the specified type is clicked.
-     *
-     * @param type The type of the push notification.
-     * @param data The JSON object containing the notification data.
-     * @return True if the handling was successful, false otherwise.
-     */
-    fun handleClickedSystemNotification(type: CinnoxPushType, data: JSONObject): Boolean
-
-    /**
-     * Releases any resources held by the CinnoxPushManager instance and revoke the push token.
-     */
-    fun release()
-}
-
-```
+## [Api Documentation](https://cinnoxgithub.github.io/android_visitor_sample_app/)
