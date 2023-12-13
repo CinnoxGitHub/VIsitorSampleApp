@@ -82,32 +82,13 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-## **Step 4: Support Push Message**
-1. To integrate Firebase Cloud Messaging (FCM) of your application with our library, you have to provide us with the following info:
-   `Package Name`:
-   The package name is a unique identifier for your Android application. It is typically defined in the AndroidManifest.xml file of your project. To find the package name:
-   
-   1. Open your Android project in Android Studio.
-   2. In the Project view, navigate to the "app" folder.
-   3. Expand the "app" folder and locate the "AndroidManifest.xml" file.
-   4. Open the "AndroidManifest.xml" file and find the "package" attribute in the "manifest" tag.
-   5. The value of the "package" attribute is your package name. It usually follows a pattern like "com.example.myapp".
-   
-   `FCM Server Key`:
-   The FCM Server key is a unique identifier used to authenticate requests from the server to the FCM API. To generate the FCM Server Key:
-   
-   1. Go to the Firebase console (console.firebase.google.com).
-   2. Select your Firebase project or create a new one.
-   3. Navigate to the "Project settings" by clicking on the gear icon.
-   4. In the "Project settings" page, select the "Cloud Messaging" tab.
-   5. Scroll down to the "Server Key" section.
-   6. If you haven't generated a server key before, click on the "Create Server Key" button. If you have an existing server key, you can use it.
-   7. A dialog box will appear displaying your FCM Service Key. Copy the key and provide it to our library.
-    
-   Please send us your info via email at support@cinnox.com with "Info for FCM" as the email subject.
+## **Step 4: Push Notification Setup Guide**
 
- 
-2. If you have already implemented FCM service in your app, please follow these steps:
+Now Supporting FCM, Xiaomi, and Huawei Push Notifications!
+
+Follow the steps below to enable push notifications in your app:
+
+1. If you have already implemented FCM service in your app, please follow these steps:
 
    1. Here's an example of the FcmPushService class:
    ```kotlin
@@ -143,7 +124,7 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
    4. You can use the method genFcmRemoteMessagePushData in FcmPushHelper file for extract the JSONObject data for the handlePushNotification api.
  
 
-3. If you have already implemented XIAOMI service in your app, please follow these steps:
+2. If you have already implemented XIAOMI service in your app, please follow these steps:
 
    1. Here's an example of the XiaomiPushService class:
    ```kotlin
@@ -201,7 +182,7 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
    4. You can use the method genXiaomiRemoteMessagePushData in XiaomiPushHelper file for extract the JSONObject data for the handlePushNotification api.
    
 
-4. If you have already implemented HUAWEI service in your app, please follow these steps:
+3. If you have already implemented HUAWEI service in your app, please follow these steps:
 
    1. Here's an example of the HuaweiPushService class:
    ```kotlin
@@ -243,7 +224,7 @@ Add CinnoxVisitorWidget in the layout activity_main.xml
    4. You can use the method genHuaweiRemoteMessagePushData in HuaweiPushHelper file for extract the JSONObject data for the handlePushNotification api.
    
    
-5. To handle system notifications when the user clicks on them, you can follow this example using the LAUNCHER MainActivity class:
+4. To handle system notifications when the user clicks on them, you can follow this example using the LAUNCHER MainActivity class:
 
    1. Here's an example of the MainActivity class:
    ```kotlin
