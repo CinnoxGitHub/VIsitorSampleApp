@@ -12,6 +12,7 @@ import com.m800.sdk.core.noti.CinnoxPushType
 class MainApplication : Application() {
     companion object {
         const val serviceId = "xxxx.cinnox.com"
+        const val key = "xxxxx"
         val pushType = CinnoxPushType.FCM
     }
 
@@ -22,8 +23,7 @@ class MainApplication : Application() {
     }
     override fun onCreate() {
         super.onCreate()
-        val core = CinnoxVisitorCore.initialize(this, serviceId)
-        core.registerListener(mCoreListener)
+        val core = CinnoxVisitorCore.initialize(this, serviceId, key, mCoreListener)
         when (pushType) {
             CinnoxPushType.FCM -> FcmPushService().initialize(this)
             CinnoxPushType.XIAOMI -> XiaomiPushService().initialize(this)

@@ -99,7 +99,7 @@ class XiaomiPushService : PushMessageReceiver() {
     }
 
     private fun updateToken(token: String) {
-        CinnoxVisitorCore.getInstance().getPushManager().updateToken(
+        CinnoxVisitorCore.getInstance().getPushManager()?.updateToken(
             CinnoxPushType.XIAOMI,
             token
         )
@@ -109,7 +109,7 @@ class XiaomiPushService : PushMessageReceiver() {
         val data = genXiaomiRemoteMessagePushData(message)
         Log.i(TAG, "onPushMessage data: $data")
         data?.let {
-            CinnoxVisitorCore.getInstance().getPushManager().handlePushNotification(
+            CinnoxVisitorCore.getInstance().getPushManager()?.handlePushNotification(
                 CinnoxPushType.XIAOMI,
                 it
             )
