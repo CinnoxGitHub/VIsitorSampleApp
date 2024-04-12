@@ -16,7 +16,7 @@ This will include the JitPack repository in your project, allowing you to fetch 
 2. Add the following code snippet inside the dependencies block:
 
 ```kotlin
-implementation 'com.github.CinnoxGitHub:visitor_sdk:1.0.12'
+implementation 'com.github.CinnoxGitHub:visitor_sdk:1.0.28'
 ```
 This line specifies the dependency on the visitor_sdk library from the JitPack repository. 
 
@@ -24,12 +24,20 @@ Sync your project with the Gradle files by clicking on the "Sync Now" button or 
 Congratulations! You have successfully updated the dependencies using JitPack. The visitor_sdk library is now included in your Android project.
 
 ## **Step 2: Set Up and Initialisation**
-
-1. Create a new class called MainApplication that extends Application & Add CinnoxVisitorCoreListener and register it when you need to know the initialisation end.
+1. apply kotlin parcelize in app/build.gradle
+ add apply plugin: 'kotlin-parcelize' before apply plugin: 'kotlin-kapt'
+ ```kotlin
+  apply plugin: 'com.android.library'
+  apply plugin: 'kotlin-android'
+  apply plugin: 'kotlin-kapt'
+  apply plugin: 'kotlin-parcelize'
+ ```
+2. Create a new class called MainApplication that extends Application & Add CinnoxVisitorCoreListener and register it when you need to know the initialisation end.
  ```kotlin
  class MainApplication : Application() {
      companion object {
          const val serviceName = "xxxx.cinnox.com" // Replace with your CINNOX subdomain
+         const val key = "xxxxx" // Please contact cinnox to get the key
      }
 
      private val mCoreListener: CinnoxVisitorCoreListener = object : CinnoxVisitorCoreListener{
@@ -40,13 +48,11 @@ Congratulations! You have successfully updated the dependencies using JitPack. T
 
      override fun onCreate() {
          super.onCreate()
-         val core = CinnoxVisitorCore.initialize(this, serviceName)
-         core.registerListener(mCoreListener)
+         val core = CinnoxVisitorCore.initialize(this, serviceId, key, mCoreListener)
      }
  }
  ```
- Remember to replace "xxxx.cinnox.com" with your actual CINNOX subdomain, which you can find in your CINNOX Dashboard under Administration > Widget > Installation.
-
+ Remember to replace "xxxx.cinnox.com" with your actual CINNOX subdomain, which you can find in your CINNOX Dashboard under Administration > Widget > Installation. And Contact us to get the key.
  Now, with CinnoxVisitorCore properly initialized in the MainApplication class, the SDK will be ready to use throughout the entire lifecycle of your Android application. Make sure to update your AndroidManifest.xml to use the MainApplication class as the application name:
  
  ```kotlin
@@ -102,7 +108,7 @@ Follow the steps below to enable push notifications in your app:
        override fun onMessageReceived(remoteMessage: RemoteMessage) {
            val data = genFcmRemoteMessagePushData(remoteMessage)
            data?.let {
-               CinnoxVisitorCore.getInstance().getPushManager().handlePushNotification(
+               CinnoxVisitorCore.getInstance().getPushManager()?.handlePushNotification(
                    CinnoxPushType.FCM,
                    it
                )
@@ -110,7 +116,7 @@ Follow the steps below to enable push notifications in your app:
        }
 
        private fun updateToken(token: String) {
-           CinnoxVisitorCore.getInstance().getPushManager().updateToken(
+           CinnoxVisitorCore.getInstance().getPushManager()?.updateToken(
                CinnoxPushType.FCM,
                token
            )
@@ -158,7 +164,7 @@ Follow the steps below to enable push notifications in your app:
         }
     
         private fun updateToken(token: String) {
-            CinnoxVisitorCore.getInstance().getPushManager().updateToken(
+            CinnoxVisitorCore.getInstance().getPushManager()?.updateToken(
                 CinnoxPushType.XIAOMI,
                 token
             )
@@ -167,7 +173,7 @@ Follow the steps below to enable push notifications in your app:
         private fun onPushMessage(message: MiPushMessage) {
             val data = genXiaomiRemoteMessagePushData(message)
             data?.let {
-                CinnoxVisitorCore.getInstance().getPushManager().handlePushNotification(
+                CinnoxVisitorCore.getInstance().getPushManager()?.handlePushNotification(
                     CinnoxPushType.XIAOMI,
                     it
                 )
@@ -201,7 +207,7 @@ Follow the steps below to enable push notifications in your app:
            remoteMessage?.let { remoteMessage ->
                val data = genHuaweiRemoteMessagePushData(remoteMessage)
                data?.let {
-                   CinnoxVisitorCore.getInstance().getPushManager().handlePushNotification(
+                   CinnoxVisitorCore.getInstance().getPushManager()?.handlePushNotification(
                        CinnoxPushType.HUAWEI,
                        it
                    )
@@ -210,7 +216,7 @@ Follow the steps below to enable push notifications in your app:
        }
 
        private fun updateToken(token: String) {
-           CinnoxVisitorCore.getInstance().getPushManager().updateToken(
+           CinnoxVisitorCore.getInstance().getPushManager()?.updateToken(
                CinnoxPushType.HUAWEI,
                token
            )
@@ -254,7 +260,7 @@ Follow the steps below to enable push notifications in your app:
                    return
                }
                Log.i(TAG, "handleClickedSystemNotification data: $data")
-               CinnoxVisitorCore.getInstance().getPushManager().handleClickedSystemNotification(
+               CinnoxVisitorCore.getInstance().getPushManager()?.handleClickedSystemNotification(
                    MainApplication.pushType,
                    data
                )
@@ -312,3 +318,6 @@ Android 7 or later
 # **API Documentation**
 
 ## [Api Documentation](https://cinnoxgithub.github.io/android_visitor_sample_app/)
+
+# **Contact Us**
+If you encounter any technical issues, please contact us (support@cinnox.com)
