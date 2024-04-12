@@ -29,8 +29,8 @@ Congratulations! You have successfully updated the dependencies using JitPack. T
  ```kotlin
   apply plugin: 'com.android.library'
   apply plugin: 'kotlin-android'
-  apply plugin: 'kotlin-kapt'
   apply plugin: 'kotlin-parcelize'
+  apply plugin: 'kotlin-kapt'
  ```
 2. Create a new class called MainApplication that extends Application & Add CinnoxVisitorCoreListener and register it when you need to know the initialisation end.
  ```kotlin
