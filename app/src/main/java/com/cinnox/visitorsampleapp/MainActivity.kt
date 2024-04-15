@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 return
             }
             Log.i(TAG, "handleClickedSystemNotification data: $data")
-            CinnoxVisitorCore.getInstance().getPushManager().handleClickedSystemNotification(
+            CinnoxVisitorCore.getInstance().getPushManager()?.handleClickedSystemNotification(
                 MainApplication.pushType,
                 data
             )

@@ -40,7 +40,7 @@ class HuaweiPushService : HmsMessageService() {
             val data = genHuaweiRemoteMessagePushData(remoteMessage)
             Log.i(TAG, "onMessageReceived data: $data")
             data?.let {
-                CinnoxVisitorCore.getInstance().getPushManager().handlePushNotification(
+                CinnoxVisitorCore.getInstance().getPushManager()?.handlePushNotification(
                     CinnoxPushType.HUAWEI,
                     it
                 )
@@ -67,7 +67,7 @@ class HuaweiPushService : HmsMessageService() {
     }
 
     private fun updateToken(token: String) {
-        CinnoxVisitorCore.getInstance().getPushManager().updateToken(
+        CinnoxVisitorCore.getInstance().getPushManager()?.updateToken(
             CinnoxPushType.HUAWEI,
             token
         )

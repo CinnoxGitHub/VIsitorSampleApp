@@ -29,7 +29,7 @@ class FcmPushService : FirebaseMessagingService() {
         val data = genFcmRemoteMessagePushData(remoteMessage)
         Log.i(TAG, "onMessageReceived data: $data")
         data?.let {
-            CinnoxVisitorCore.getInstance().getPushManager().handlePushNotification(
+            CinnoxVisitorCore.getInstance().getPushManager()?.handlePushNotification(
                 CinnoxPushType.FCM,
                 it
             )
@@ -58,7 +58,7 @@ class FcmPushService : FirebaseMessagingService() {
     }
 
     private fun updateToken(token: String) {
-        CinnoxVisitorCore.getInstance().getPushManager().updateToken(
+        CinnoxVisitorCore.getInstance().getPushManager()?.updateToken(
             CinnoxPushType.FCM,
             token
         )
