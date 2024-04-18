@@ -16,7 +16,7 @@ This will include the JitPack repository in your project, allowing you to fetch 
 2. Add the following code snippet inside the dependencies block:
 
 ```kotlin
-implementation 'com.github.CinnoxGitHub:visitor_sdk:1.0.28'
+implementation 'com.github.CinnoxGitHub:visitor_sdk:1.0.29'
 ```
 This line specifies the dependency on the visitor_sdk library from the JitPack repository. 
 
@@ -24,7 +24,7 @@ Sync your project with the Gradle files by clicking on the "Sync Now" button or 
 Congratulations! You have successfully updated the dependencies using JitPack. The visitor_sdk library is now included in your Android project.
 
 ## **Step 2: Set Up and Initialisation**
-1. apply kotlin parcelize in app/build.gradle
+1. Apply kotlin parcelize in app/build.gradle
  add apply plugin: 'kotlin-parcelize' before apply plugin: 'kotlin-kapt'
  ```kotlin
   apply plugin: 'com.android.library'
@@ -32,7 +32,16 @@ Congratulations! You have successfully updated the dependencies using JitPack. T
   apply plugin: 'kotlin-parcelize'
   apply plugin: 'kotlin-kapt'
  ```
-2. Create a new class called MainApplication that extends Application & Add CinnoxVisitorCoreListener and register it when you need to know the initialisation end.
+2. Enable data binding app/build.gradle
+ add dataBinding { enable = true } in android block 
+ ```kotlin
+ android {
+  dataBinding {
+     enabled = true
+  }
+ }
+ ```
+3. Create a new class called MainApplication that extends Application & Add register CinnoxVisitorCoreListener, it will notify you when visitor core initialisation end.
  ```kotlin
  class MainApplication : Application() {
      companion object {
@@ -40,15 +49,17 @@ Congratulations! You have successfully updated the dependencies using JitPack. T
          const val key = "xxxxx" // Please contact cinnox to get the key
      }
 
-     private val mCoreListener: CinnoxVisitorCoreListener = object : CinnoxVisitorCoreListener{
-         override fun onInitializationEnd(success: Boolean, throwable: Throwable?) {
-             Log.d(TAG, "onInitializationEnd, isSuccess: $success, throwable: $throwable")
-         }
-     }
-
      override fun onCreate() {
          super.onCreate()
-         val core = CinnoxVisitorCore.initialize(this, serviceId, key, mCoreListener)
+         CinnoxVisitorCore.getInstance().initialize(
+            this,
+            SERVICE_NAME,
+            KEY
+        ).registerListener(object : CinnoxVisitorCoreListener {
+            override fun onInitializationEnd(success: Boolean, throwable: Throwable?) {
+                Log.d(TAG, "onInitializationEnd, isSuccess: $success, throwable: $throwable")
+            }
+        })
      }
  }
  ```
