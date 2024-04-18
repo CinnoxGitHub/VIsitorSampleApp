@@ -13,7 +13,7 @@ import com.m800.sdk.core.noti.CinnoxPushType
 class MainActivity : AppCompatActivity() {
 
     companion object{
-        const val TAG = "MainActivity"
+        private const val TAG = "MainActivity"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
