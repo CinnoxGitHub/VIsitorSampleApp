@@ -11,23 +11,28 @@ import com.m800.sdk.core.noti.CinnoxPushType
 
 class MainApplication : Application() {
     companion object {
-        const val serviceId = "xxxx.cinnox.com"
-        const val key = "xxxxx"
+        private const val TAG = "MainApplication"
+        private const val SERVICE_NAME = "xxxx.cinnox.com"
+        private const val KEY = "xxxxx"
         val pushType = CinnoxPushType.FCM
     }
 
-    private val mCoreListener: CinnoxVisitorCoreListener = object : CinnoxVisitorCoreListener {
-        override fun onInitializationEnd(success: Boolean, throwable: Throwable?) {
-            Log.d(MainActivity.TAG, "onInitializationEnd, isSuccess: $success, throwable: $throwable")
-        }
-    }
     override fun onCreate() {
         super.onCreate()
-        val core = CinnoxVisitorCore.initialize(this, serviceId, key, mCoreListener)
-        when (pushType) {
-            CinnoxPushType.FCM -> FcmPushService().initialize(this)
-            CinnoxPushType.XIAOMI -> XiaomiPushService().initialize(this)
-            CinnoxPushType.HUAWEI -> HuaweiPushService().initialize(this)
-        }
+        CinnoxVisitorCore.getInstance().initialize(
+            this,
+            SERVICE_NAME,
+            KEY
+        ).registerListener(object : CinnoxVisitorCoreListener {
+            override fun onInitializationEnd(success: Boolean, throwable: Throwable?) {
+                Log.d(TAG, "onInitializationEnd, isSuccess: $success, throwable: $throwable")
+                when (pushType) {
+                    CinnoxPushType.FCM -> FcmPushService().initialize(this@MainApplication)
+                    CinnoxPushType.XIAOMI -> XiaomiPushService().initialize(this@MainApplication)
+                    CinnoxPushType.HUAWEI -> HuaweiPushService().initialize(this@MainApplication)
+                    else -> Unit
+                }
+            }
+        })
     }
 }
