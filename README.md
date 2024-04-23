@@ -16,7 +16,7 @@ This will include the JitPack repository in your project, allowing you to fetch 
 2. Add the following code snippet inside the dependencies block:
 
 ```kotlin
-implementation 'com.github.CinnoxGitHub:visitor_sdk:1.0.29'
+implementation 'com.github.CinnoxGitHub:visitor_sdk:1.0.30'
 ```
 This line specifies the dependency on the visitor_sdk library from the JitPack repository. 
 
@@ -27,7 +27,7 @@ Congratulations! You have successfully updated the dependencies using JitPack. T
 1. Apply kotlin parcelize in app/build.gradle
  add apply plugin: 'kotlin-parcelize' before apply plugin: 'kotlin-kapt'
  ```kotlin
-  apply plugin: 'com.android.library'
+  apply plugin: 'com.android.application'
   apply plugin: 'kotlin-android'
   apply plugin: 'kotlin-parcelize'
   apply plugin: 'kotlin-kapt'
@@ -45,8 +45,8 @@ Congratulations! You have successfully updated the dependencies using JitPack. T
  ```kotlin
  class MainApplication : Application() {
      companion object {
-         const val serviceName = "xxxx.cinnox.com" // Replace with your CINNOX subdomain
-         const val key = "xxxxx" // Please contact cinnox to get the key
+         private const val SERVICE_NAME = "xxxx.cinnox.com" // Replace with your CINNOX subdomain
+         private const val KEY = "xxxxx" // Please contact cinnox to get the key
      }
 
      override fun onCreate() {
